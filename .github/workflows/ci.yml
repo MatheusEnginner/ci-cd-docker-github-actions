@@ -1,0 +1,26 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      -  name:  Checkout do código
+         uses:  actions/checkout@v3
+
+      -  name: Setup Node.js
+         uses: actions/setup-node@v3
+         with:
+           node-version:  '18'
+
+      -  name:  Instalar dependências (caso existam)
+         run:  npm install || echo "Sem dependências"
+
+      -  name:  Executar aplicação
+         run:  node app/index.js
